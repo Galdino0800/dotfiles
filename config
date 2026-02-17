@@ -521,6 +521,10 @@ exec --no-startup-id xset m 5 1
 # Launch Polybar
 exec_always --no-startup-id $polybar 
 
+# Definir layout do teclado para PT-BR (ABNT2)
+# exec_always --no-startup-id setxkbmap -layout br
+exec_always --no-startup-id setxkbmap -layout br -model abnt2
+
 # Boas Vindas
 exec --no-startup-id notify-send -t 7000 "Welcome back, Galdino '¯\_(ツ)_/¯'"
 exec --no-startup-id notify-send -t 7000 "`date +%H:%M`" "`date +%A` `date +%d` `date +%B` `date +%Y` - Week `date +%U`"
