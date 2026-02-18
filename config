@@ -445,16 +445,18 @@ bindsym $mod+Shift+e exec killall ffmpeg & notify-send "Finalizando Screencast"
 #  SCREENSHOOT
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# 1. FullScreen (Salva e avisa)
-bindsym Print exec --no-startup-id maim "$HOME/Imagens/Screenshots/$(date +%Y-%m-%d_%H%M%S).png" && notify-send "📸 Screenshot" "Captura da tela cheia salva."
+# ──────────────────────────────────────────────────────────────────────────────
+# CAPTURA DE TELA (maim + dunst)
+# ──────────────────────────────────────────────────────────────────────────────
 
-# 2. Select Region (Salva e avisa)
-# Adicionei o "-u" para o maim esconder o cursor do mouse na print
-bindsym ctrl+Print exec --no-startup-id maim -s -u "$HOME/Imagens/Screenshots/$(date +%Y-%m-%d_%H%M%S).png" && notify-send "✂️ Screenshot" "Área selecionada salva."
+# Tela Cheia (Salva e avisa com data e hora)
+bindsym Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Full_$(date +%d%m%y_%H%M%S).png"; maim "$FILE" && notify-send -u low -i camera-photo "📸 Screenshot" "Tela cheia salva em:\n${FILE#$HOME/}"'
 
-# 3. Screen Region then copy to clipboard (Apenas copia)
-# Usei o "slop" (que o maim chama internamente) para uma seleção mais suave
-bindsym Mod4+Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado" "A área foi enviada para o clipboard."
+# Selecionar Área (Salva e avisa)
+bindsym ctrl+Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Area_$(date +%d%m%y_%H%M%S).png"; maim -s -u "$FILE" && notify-send -u low -i crosshairs "✂️ Recorte Salvo" "Área selecionada salva com sucesso."'
+
+# Selecionar Área e Copiar (Não salva arquivo, ideal para mandar no Discord/WhatsApp)
+bindsym $mod+Print exec --no-startup-id bash -c 'maim -s -u | xclip -selection clipboard -t image/png && notify-send -u low -i edit-paste "📋 Clipboard" "Imagem copiada para a área de transferência."'
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  AUTOSTART
