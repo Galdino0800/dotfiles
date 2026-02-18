@@ -96,7 +96,7 @@ new_float pixel 3
 hide_edge_borders both
 
 # Fonte usada nas janelas
-font pango:System San Francisco Display 10
+font pango:Noto Sans 10
 
 # Use Mouse+$mod para arrastar as janelas flutuantes para a posição desejada.
 floating_modifier $mod
@@ -385,7 +385,7 @@ for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="GParted"] floating enable focus
 for_window [class="^Spotify$"] floating disable
 for_window [class="Epdfview"] floating enable 
-for_window [class="xfce4-terminal"] floating enable
+#for_window [class="xfce4-terminal"] floating enable
 #for_window [class="gsimplecal"] floating enable, move position center
 for_window [class="randr"] floating enable focus
 for_window [class="xfce4-terminal"] floating enable resize set 720 360
@@ -445,14 +445,18 @@ bindsym $mod+Shift+e exec killall ffmpeg & notify-send "Finalizando Screencast"
 #  SCREENSHOOT
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# FullScreen
-bindsym Print exec maim ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "Taking a screenshot ... ", mode "default"
+# ──────────────────────────────────────────────────────────────────────────────
+# CAPTURA DE TELA (maim + dunst)
+# ──────────────────────────────────────────────────────────────────────────────
 
-# Select Region
-bindsym ctrl+Print exec maim -s ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "Taking a screenshot ... ", mode "default"
+# Tela Cheia (Salva e avisa com data e hora)
+bindsym Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Full_$(date +%d%m%y_%H%M%S).png"; maim "$FILE" && notify-send -u low -i camera-photo "📸 Screenshot" "Tela cheia salva em:\n${FILE#$HOME/}"'
 
-# Screen Region then copy the clipboard
-bindsym Mod4+Print exec maim -s | xclip -selection clipboard -t image/png && notify-send " Copiado "
+# Selecionar Área (Salva e avisa)
+bindsym ctrl+Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Area_$(date +%d%m%y_%H%M%S).png"; maim -s -u "$FILE" && notify-send -u low -i crosshairs "✂️ Recorte Salvo" "Área selecionada salva com sucesso."'
+
+# Selecionar Área e Copiar (Não salva arquivo, ideal para mandar no Discord/WhatsApp)
+bindsym $mod+Print exec --no-startup-id bash -c 'maim -s -u | xclip -selection clipboard -t image/png && notify-send -u low -i edit-paste "📋 Clipboard" "Imagem copiada para a área de transferência."'
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  AUTOSTART
@@ -462,7 +466,7 @@ bindsym Mod4+Print exec maim -s | xclip -selection clipboard -t image/png && not
 
 # Definir Wallpaper Feh
 #exec_alawys --no-startup-id feh --bg-fill '/home/ghost/Imagens/Wallpaper/wallhaven-77298.jpg'
-#bindsym $mod+r exec --no-startup-id feh --randomize --bg-tile "${HOME}/Imagens/Wallpapers"     
+#bindsym $mod+r exec --no-startup-id feh --randomize --bg-tile "${HOME}/Imagens/Wallpapers"	
 
 # Launcher the notification daemon.
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc    
@@ -528,7 +532,6 @@ exec_always --no-startup-id setxkbmap -layout br -model abnt2
 # Boas Vindas
 exec --no-startup-id notify-send -t 7000 "Welcome back, Galdino '¯\_(ツ)_/¯'"
 exec --no-startup-id notify-send -t 7000 "`date +%H:%M`" "`date +%A` `date +%d` `date +%B` `date +%Y` - Week `date +%U`"
-
 
 
 
