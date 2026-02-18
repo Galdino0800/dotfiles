@@ -1,0 +1,543 @@
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                               GLOBAL VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[colors]
+background = #292D3E
+background-alt = #f0f0f0
+foreground = #f0f0f0
+foreground-alt = #2d2d2d
+primary = #6D8EC1
+secondary = #e60053
+alert = #bd2c40
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                               B A R - T O P 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[bar/top]
+monitor = LVDS1
+width = 100%
+height = 20
+radius = 0
+fixed-center = true
+
+top = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 6
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+; Fonts
+; Fonte 0: Texto 
+font-0 = "Inter:style=Medium:size=10;2"
+
+; Fonte 1: Símbolos (Substituindo o Siji)
+font-1 = "Symbols Nerd Font:size=12;3"
+
+; Fonte 2: Font Awesome (Opcional, para garantir)
+font-2 = "Font Awesome 6 Free:style=Solid:size=10;3"
+
+modules-left = system i3 xwindow 
+modules-center = 
+modules-right = cpu ram temperature battery wlan time 
+
+;tray-position = right
+;tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                               B A R - B O T T O M
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[bar/bottom]
+monitor = LVDS1
+width = 100%
+height = 20
+radius = 0
+
+bottom = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 6
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+; Fonte 0:
+font-0 = "Inter:style=Medium:size=10;2"
+
+; Fonte 1: Símbolos (Substituindo o Siji)
+font-1 = "Symbols Nerd Font:size=12;3"
+
+; Fonte 2: Font Awesome (Opcional, para garantir)
+font-2 = "Font Awesome 6 Free:style=Solid:size=10;3"
+
+modules-left = kernel homefs rootfs updates
+modules-center = current-song volume
+modules-right = mail weather 
+
+;tray-position = right
+;tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                                   MODULES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;----------------------------------------------------------
+;			   I 3 
+;----------------------------------------------------------
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+
+; ws-icon-[0-9]+ = label;icon
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+;ws-icon-default = 
+
+
+strip-wsnumbers = true
+
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-foreground = ${colors.foreground-alt}
+label-focused-padding = 1
+
+
+label-unfocused = %name%
+label-unfocused-padding = 1
+label-unfocused-foreground = ${colors.foreground}
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.alert}
+label-urgent-padding = 1
+
+label-visible = %name%
+
+
+
+;----------------------------------------------------------
+;			   X W I N D O W 
+;----------------------------------------------------------
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:17:...%
+format-prefix = " "
+format-prefix-foreground = #6D8EC1
+
+
+;----------------------------------------------------------
+;			  S Y S T E M
+;----------------------------------------------------------
+
+[module/system]
+type = custom/script
+exec = echo " "
+format = <label>
+label = " Arch "
+label-background = #6D8EC1
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+click-left = ~/.config/polybar/rofi-apps
+
+click-right = ~/.config/polybar/powermenu.sh
+
+;----------------------------------------------------------
+;		           T E M P 
+;----------------------------------------------------------
+
+[module/temperature]
+type = internal/temperature
+interval = 2
+thermal-zone = 0
+warn-temperature = 65
+
+
+label = " %temperature% "
+label-background = #6D8EC1
+label-warn = " %temperature% "
+label-warn-foreground = ${colors.alert}
+label-warn-background = ${colors.background-alt}
+
+format-prefix = "  "
+
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+;----------------------------------------------------------
+;		           C P U
+;----------------------------------------------------------
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+label =  " %percentage:2%% "
+label-background = #6D8EC1
+
+;----------------------------------------------------------
+;		           R A M 
+;----------------------------------------------------------
+
+[module/ram]
+type = internal/memory
+interval = 2
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+label-background = #6D8EC1
+label = " %percentage_used%% "
+
+;----------------------------------------------------------
+;		           W L A N 
+;----------------------------------------------------------
+
+[module/wlan]
+type = internal/network
+interface = wlp6s0
+interval = 3.0
+
+format-connected = <ramp-signal><label-connected>
+label-connected = "WiFi"
+;label-connected = %essid%
+label-connected-background = #6D8EC1
+label-connected-padding = 1
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = "  "
+ramp-signal-1 = "  "
+ramp-signal-2 = "  "
+ramp-signal-3 = "  "
+ramp-signal-4 = "  "
+ramp-signal-background = ${colors.background-alt}
+ramp-signal-foreground = ${colors.foreground-alt}
+
+;----------------------------------------------------------
+;		           T I M E
+;----------------------------------------------------------
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = %{A1:gsimplecal:} %H:%M %{A}
+;time = " %a %I:%M %p "
+;time-alt = " %A, %d %B %Y %H:%M "
+
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+label = %time%
+label-background = #6D8EC1
+
+;----------------------------------------------------------
+;		           B A T T E R Y
+;----------------------------------------------------------
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = AC
+full-at = 98
+
+label-discharging-background = #6D8EC1
+label-charging-background = #6D8EC1
+label-charging-padding = 1
+label-discharging-padding = 1
+format-charging = <animation-charging><label-charging>
+
+format-discharging = <ramp-capacity><label-discharging>
+
+format-full-prefix = "  "
+format-full-prefix-background = ${colors.background-alt}
+format-full-prefix-foreground = ${colors.foreground-alt}
+
+ramp-capacity-0 = "  "
+ramp-capacity-1 = "  "
+ramp-capacity-2 = "  "
+ramp-capacity-background = ${colors.background-alt}
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = "  "
+animation-charging-1 = "  "
+animation-charging-2 = "  "
+animation-charging-background = ${colors.background-alt}
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+;----------------------------------------------------------
+;		           W E A T H E R
+;----------------------------------------------------------
+
+[module/weather]
+type = custom/script
+interval = 900
+label-padding = 1
+exec = ~/Documentos/weather.py
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+format =  <label>
+format-prefix = "  "
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;			      M A I L
+;----------------------------------------------------------
+
+[module/mail]
+type = custom/script
+interval = 2300
+format = <label>
+label-padding = 1
+
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+format-underline = ${colors.alert}
+exec = ~/.config/polybar/email.py
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;		             K E R N E L
+;----------------------------------------------------------
+
+[module/kernel]
+type = custom/script
+exec = uname -r | sed 's/-ARCH//g'
+tail = false
+label-padding = 1
+interval = 3024
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "  " 
+
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;		        F I L E S Y S T E M - /
+;----------------------------------------------------------
+
+[module/rootfs]
+interval = 400
+label-padding = 1
+type = custom/script
+exec = df -h / | awk 'NR==2 {print $5}'
+;exec = df -h / | awk 'NR==2 {total=$2; used=$3; print used" / "total}'
+format =  <label>
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;		    F I L E S Y S T E M - H O M E
+;----------------------------------------------------------
+
+[module/homefs]
+interval = 400
+label-padding = 1
+type = custom/script
+exec = df -h /home | awk 'NR==2 {print $5}'
+;exec = df -h /home | awk 'NR==2 {total=$2; used=$3; print used" / "total}'
+format =  <label>
+format-prefix = "  "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;		           U P D A T E S
+;----------------------------------------------------------
+
+[module/updates]
+type = custom/script
+interval = 3900
+label-padding = 1
+format = <label>
+label-foreground = ${colors.foreground}
+format-prefix = "  "
+tail = true
+click-left = notify-send "Packages: " "$(checkupdates)"
+click-right = notify-send "Update with:" "pacman -Qu | wc -l"
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+exec = ~/.config/polybar/updates-arch.sh
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;			   B I T C O I N 
+;----------------------------------------------------------
+
+[module/bitcoin]
+type = custom/script
+interval = 2300
+format = <label>
+label-padding = 1
+
+format-prefix = " BTC "
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+exec = /home/ghost/Documentos/crypto.py bitcoin
+
+format-background = #6D8EC1
+
+;----------------------------------------------------------
+;			   V O L U M E 
+;----------------------------------------------------------
+
+[module/volume]
+type = internal/volume
+
+; mapping = true
+format-volume = <ramp-volume><label-volume>
+
+label-volume = %{B#6D8EC1} %percentage%% %{B-}
+label-volume-background = ${colors.background-alt}
+label-muted = "  "
+label-muted-foreground = ${colors.foreground}
+label-muted-background = ${colors.background}
+
+ramp-volume-0 = "  "
+ramp-volume-0-foreground = ${colors.foreground-alt}
+ramp-volume-0-background = ${colors.background-alt}
+ramp-volume-1 = "  "
+ramp-volume-1-foreground = ${colors.foreground-alt}
+ramp-volume-1-background = ${colors.background-alt}
+ramp-volume-2 = "  "
+ramp-volume-2-foreground = ${colors.foreground-alt}
+ramp-volume-2-background = ${colors.background-alt}
+ramp-volume-3 = "  "
+ramp-volume-3-foreground = ${colors.foreground-alt}
+ramp-volume-3-background = ${colors.background-alt}
+
+
+;----------------------------------------------------------
+;			   M P D
+;----------------------------------------------------------
+
+[module/mpd]
+type = internal/mpd
+format-online = " "
+format-offline = " "
+format-online-padding = 1
+format-offline-padding = 1
+
+format-online-prefix = ""
+format-online-prefix-background = ${colors.background-alt}
+format-online-prefix-foreground = ${colors.foreground-alt}
+format-online-prefix-padding = 1
+
+format-offline-prefix = ""
+format-offline-prefix-background = ${colors.background-alt}
+format-offline-prefix-foreground = ${colors.foreground-alt}
+format-offline-prefix-padding = 1
+
+;----------------------------------------------------------
+;			   B U T T O N S
+;----------------------------------------------------------
+
+[module/buttons]
+type = internal/mpd
+format-online = <icon-prev> <toggle> <icon-next>
+format-background = #6D8EC1
+format-online-padding = 1
+format-online-background = ${colors.background} 
+format-online-offset = -32
+label-padding = 1
+
+icon-prev = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+
+;----------------------------------------------------------
+;			    M P D
+;----------------------------------------------------------
+
+[module/current-song]
+type = custom/script
+exec = echo $(mpc current) | sed s/\;/,\ /g | cut -d - -f 1,2
+click-left = mpc prev
+click-middle = mpc toggle
+click-right = mpc next
+label = %output%
+interval = 1
+label-padding = 1
+
+format-prefix = "  "
+
+format-prefix-background = ${colors.background-alt}
+format-prefix-foreground = ${colors.foreground-alt}
+
+format-background = #6D8EC1
+
