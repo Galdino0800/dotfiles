@@ -96,7 +96,7 @@ new_float pixel 3
 hide_edge_borders both
 
 # Fonte usada nas janelas
-font pango:System San Francisco Display 10
+font pango:Noto Sans 10
 
 # Use Mouse+$mod para arrastar as janelas flutuantes para a posição desejada.
 floating_modifier $mod
@@ -385,7 +385,7 @@ for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="GParted"] floating enable focus
 for_window [class="^Spotify$"] floating disable
 for_window [class="Epdfview"] floating enable 
-for_window [class="xfce4-terminal"] floating enable
+#for_window [class="xfce4-terminal"] floating enable
 #for_window [class="gsimplecal"] floating enable, move position center
 for_window [class="randr"] floating enable focus
 for_window [class="xfce4-terminal"] floating enable resize set 720 360
@@ -445,14 +445,16 @@ bindsym $mod+Shift+e exec killall ffmpeg & notify-send "Finalizando Screencast"
 #  SCREENSHOOT
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# FullScreen
-bindsym Print exec maim ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "Taking a screenshot ... ", mode "default"
+# 1. FullScreen (Salva e avisa)
+bindsym Print exec --no-startup-id maim "$HOME/Imagens/Screenshots/$(date +%Y-%m-%d_%H%M%S).png" && notify-send "📸 Screenshot" "Captura da tela cheia salva."
 
-# Select Region
-bindsym ctrl+Print exec maim -s ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "Taking a screenshot ... ", mode "default"
+# 2. Select Region (Salva e avisa)
+# Adicionei o "-u" para o maim esconder o cursor do mouse na print
+bindsym ctrl+Print exec --no-startup-id maim -s -u "$HOME/Imagens/Screenshots/$(date +%Y-%m-%d_%H%M%S).png" && notify-send "✂️ Screenshot" "Área selecionada salva."
 
-# Screen Region then copy the clipboard
-bindsym Mod4+Print exec maim -s | xclip -selection clipboard -t image/png && notify-send " Copiado "
+# 3. Screen Region then copy to clipboard (Apenas copia)
+# Usei o "slop" (que o maim chama internamente) para uma seleção mais suave
+bindsym Mod4+Print exec --no-startup-id maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado" "A área foi enviada para o clipboard."
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  AUTOSTART
