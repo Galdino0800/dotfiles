@@ -1,0 +1,59 @@
+* {
+    bg: #282828;
+    bg-alt: #3c3836;
+    fg: #ebdbb2;
+    accent: #83a598;
+    urgent: #fb4934;
+
+    background-color: @bg;
+    text-color: @fg;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    width: 30%;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 8px;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @bg-alt;
+    padding: 12px;
+}
+
+prompt {
+    background-color: @accent;
+    text-color: @bg;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+entry {
+    padding: 8px;
+    placeholder: "Pesquisar...";
+    placeholder-color: @fg;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    fixed-height: false;
+}
+
+element {
+    padding: 8px;
+    spacing: 12px;
+}
+
+element selected {
+    background-color: @bg-alt;
+    text-color: @accent;
+}
+
+element-icon {
+    size: 24px;
+}

@@ -64,7 +64,7 @@ focus_follows_mouse no
 
 # Sistema & Terminal
 bindsym $mod+Return       exec xfce4-terminal
-bindsym $mod+d            exec rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme ~/.config/rofi/config.rasi
 bindsym $mod+Control+Delete exec lxtask
 bindsym $mod+c            kill
 
@@ -198,6 +198,7 @@ for_window [class="xfce4-terminal"] floating enable resize set 720 360
 # Essenciais do Sistema
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
+exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id $polybar
 
@@ -208,7 +209,7 @@ exec --no-startup-id xset m 5 1        # Velocidade do mouse
 
 # Aplicativos de Background
 exec --no-startup-id pcmanfm -d
-exec --no-startup-id mpd
+exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 exec --no-startup-id xautolock -time 20 -locker "~/.config/i3/ilockit/ilockit"
 
 # Notificação de Boas Vindas
