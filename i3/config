@@ -200,7 +200,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
-exec_always --no-startup-id $polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Teclado e Mouse
 exec_always --no-startup-id setxkbmap -layout br -model abnt2
