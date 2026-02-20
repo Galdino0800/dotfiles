@@ -212,6 +212,7 @@ exec --no-startup-id xset m 5 1        # Velocidade do mouse
 exec --no-startup-id pcmanfm --desktop-off
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 exec --no-startup-id xautolock -time 20 -locker "~/.config/i3/ilockit/ilockit"
+exec --no-startup-id nm-applet
 
 # Notificação de Boas Vindas
 exec --no-startup-id notify-send -t 5000 "Bem-vindo, Galdino!" "Sistema carregado com sucesso."
