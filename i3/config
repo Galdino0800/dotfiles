@@ -201,6 +201,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Teclado e Mouse
 exec_always --no-startup-id setxkbmap -layout br -model abnt2
@@ -208,7 +209,7 @@ exec --no-startup-id xset s off -dpms  # Desativa suspensão de tela automática
 exec --no-startup-id xset m 5 1        # Velocidade do mouse
 
 # Aplicativos de Background
-exec --no-startup-id pcmanfm -d
+exec --no-startup-id pcmanfm --desktop-off
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 exec --no-startup-id xautolock -time 20 -locker "~/.config/i3/ilockit/ilockit"
 
