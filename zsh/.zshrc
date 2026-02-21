@@ -10,7 +10,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # Tema (O 'robbyrussell' é o clássico, mas o 'agnoster' é ótimo para ícones)
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Plugins Recomendados (Instale via git nas pastas custom do oh-my-zsh)
 # zsh-autosuggestions: Sugere comandos baseados no seu histórico
