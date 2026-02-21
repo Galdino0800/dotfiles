@@ -222,6 +222,7 @@ exec --no-startup-id nm-applet
 
 # Notificação de Boas Vindas
 exec --no-startup-id notify-send -t 5000 "Bem-vindo, Galdino!" "Sistema carregado com sucesso."
+#exec --no-startup-id notify-send -t 8000 "Sistemas Online" "Iniciado em: $(date +'%H:%M')\nKernel: $(uname -r)"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  MODOS (RESIZE & GAPS)
