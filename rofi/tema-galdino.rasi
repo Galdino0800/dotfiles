@@ -1,57 +1,69 @@
-* {
-    bg: #282828;
-    bg-alt: #3c3836;
-    fg: #ebdbb2;
-    accent: #83a598;
-    urgent: #fb4934;
+configuration {
+    modi: "drun";
+    show-icons: true;
+    display-drun: "  ";  /* Ícone de busca adicionado aqui */
+    drun-display-format: "{icon} {name}";
+}
 
-    background-color: @bg;
+* {
+    /* Cores ajustadas para o seu tema Gruvbox/Arc-Dark */
+    bg: #282828e6;       /* Fundo com transparência para o Blur do seu Picom */
+    fg: #ebdbb2;         /* Texto claro */
+    accent: #458588;     /* Azul petróleo para combinar com o Dunst/Polybar */
+    
+    background-color: transparent;
     text-color: @fg;
-    margin: 0;
-    padding: 0;
-    spacing: 0;
+    font: "JetBrainsMono Nerd Font 10";
 }
 
 window {
     width: 30%;
+    border-radius: 12px; /* Cantos arredondados conforme o seu picom.conf */
+    background-color: @bg;
     border: 2px;
     border-color: @accent;
-    border-radius: 8px;
+    padding: 10px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing: 10px;
 }
 
 inputbar {
-    children: [prompt, entry];
-    background-color: @bg-alt;
-    padding: 12px;
+    padding: 8px;
+    background-color: #3c3836; /* Fundo levemente mais claro para a barra */
+    border-radius: 8px;
+    children: [ prompt, entry ];
 }
 
 prompt {
-    background-color: @accent;
-    text-color: @bg;
-    padding: 8px 12px;
-    border-radius: 4px;
+    text-color: @accent;
+    padding: 0px 10px 0px 5px;
 }
 
 entry {
-    padding: 8px;
     placeholder: "Pesquisar...";
-    placeholder-color: @fg;
+    placeholder-color: #928374;
 }
 
 listview {
-    lines: 8;
+    lines: 7;
     columns: 1;
+    scrollbar: false;
     fixed-height: false;
+    spacing: 5px;
 }
 
 element {
     padding: 8px;
-    spacing: 12px;
+    border-radius: 6px;
+    spacing: 10px;
 }
 
 element selected {
-    background-color: @bg-alt;
-    text-color: @accent;
+    background-color: @accent;
+    text-color: #282828;
 }
 
 element-icon {

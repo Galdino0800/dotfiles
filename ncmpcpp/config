@@ -7,17 +7,15 @@
 # ░██    ░░███ ░░██████ ░██        ░██░██       ░░██████ ░██      ░██      
 # ░░      ░░░   ░░░░░░  ░░         ░░ ░░         ░░░░░░  ░░       ░░    
 
-
+# Configuração Galdino - Limpa & Otimizada
 
 ##### Conexão #####
 ncmpcpp_directory = "~/.config/ncmpcpp"
 mpd_host = "127.0.0.1"
 mpd_port = "6600"
-mpd_connection_timeout = 5
 system_encoding = "UTF-8"
 
-##### Interface de Playlist #####
-# Estilo moderno em colunas
+##### Interface #####
 playlist_display_mode = "columns"
 browser_display_mode = "columns"
 search_engine_display_mode = "columns"
@@ -26,78 +24,42 @@ centered_cursor = "yes"
 titles_visibility = "yes"
 header_visibility = "no"
 
-# Formato das colunas (Artista, Título, Álbum, Tempo)
+# Suas cores originais (Branco, Vermelho, Ciano)
 song_columns_list_format = "(10)[white]{l} (25)[red]{a} (40)[white]{t|f} (25)[cyan]{b}"
-
-# Formato da lista simples (Híbrido das suas configs) [cite: 3, 8]
 song_list_format = "$1%l$9 $1▕ $1$8%a$9$1 - $1$7%t$1 $R$2[%b]$9"
 
 ##### Barra de Progresso #####
-# Usando o visualizador "─╼╌" que você tinha na config 2 [cite: 9]
 progressbar_look = "─╼╌"
 progressbar_color = "black"
 progressbar_elapsed_color = "white"
 
-##### Cores (Paleta Gruvbox/Dark) #####
-# Sincronizado com o i3 e Rofi
+##### Cores (Paleta Gruvbox/Arc-Dark) #####
 main_window_color = "default"
 color1 = "red"
 color2 = "white"
 header_window_color = "white"
 volume_color = "cyan"
 statusbar_color = "white"
-active_column_color = "red"
 discard_colors_if_item_is_selected = "yes"
 
 ##### Visualizador (Spectrum) #####
-# Configurado para o FIFO que definimos no MPD [cite: 4, 10]
-visualizer_fifo_path = "/tmp/mpd.fifo"
+# Corrigido: visualizer_data_source é o padrão atual
+visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "Visualizer feed"
-visualizer_sync_interval = 30
 visualizer_type = "spectrum"
 visualizer_look = "●┃"
 visualizer_color = "cyan, blue, white, red"
 
 ##### Letras (Lyrics) #####
-# Buscadores atualizados [cite: 11]
 lyrics_fetchers = "genius, azlyrics, metrolyrics, internet"
 follow_now_playing_lyrics = "yes"
 
 ##### Miscelânea #####
 mouse_support = "yes"
-display_bitrate = "no"
 enable_window_title = "yes"
 song_window_title_format = "{%t}|{%f} - {%a}"
 
-##### Notificações #####
-# Comando modernizado para evitar loops de notificação 
-execute_on_song_change = notify-send "♫ Tocando Agora" "$(mpc current)"
-
-
-# █▓▒░ cheat sheet
-# %l - length
-# %f - filename
-# %D - directory
-# %a - artist
-# %t - title
-# %b - album
-# %y - year
-# %n - track number (01/12 -> 01)
-# %N - full track info (01/12 -> 01/12)
-# %g - genre
-# %c - composer
-# %p - performer
-# %d - disc
-# %C - comment
-# $R - begin right alignment
-# █▓▒░ colors
-# $0 - default window color
-# $1 - black
-# $2 - red
-# $3 - green
-# $4 - yellow
-# $5 - blue
-# $6 - magenta
-# $7 - cyan
-# $8 - white
-# $9 - end of current color
+##### Notificações (Melhoradas) #####
+# O -h evita que as notificações se empilhem no seu Dunst
+execute_on_song_change = 'notify-send -h string:x-dunst-stack-tag:music "♫ Tocando Agora" "$(ncmpcpp --now-playing "{%a - %t}")"'
+#execute_on_song_change = "notify-send -h string:x-dunst-stack-tag:music '♫ Tocando Agora' '%a - %t'"
