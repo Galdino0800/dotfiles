@@ -192,7 +192,8 @@ bindsym $mod+Shift+e exec killall ffmpeg && notify-send "🎥 Gravação Finaliz
 for_window [window_role="pop-up|task_dialog"] floating enable
 for_window [class="Galculator|Nitrogen|Lxappearance|Sxiv|feh|Mpv"] floating enable
 for_window [class="(?i)pavucontrol|(?i)lxtask"] floating enable
-for_window [class="xfce4-terminal"] floating enable resize set 720 360
+for_window [class="Xfce4-terminal" title="Preferências"] floating enable, resize set 800 600, move position center
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  AUTOSTART (ORDEM LÓGICA)

@@ -11,6 +11,7 @@
 
 ##### Conexão #####
 ncmpcpp_directory = "~/.config/ncmpcpp"
+lyrics_directory = "~/.config/ncmpcpp/lyrics"
 mpd_host = "127.0.0.1"
 mpd_port = "6600"
 system_encoding = "UTF-8"
@@ -59,7 +60,5 @@ mouse_support = "yes"
 enable_window_title = "yes"
 song_window_title_format = "{%t}|{%f} - {%a}"
 
-##### Notificações (Melhoradas) #####
-# O -h evita que as notificações se empilhem no seu Dunst
-execute_on_song_change = 'notify-send -h string:x-dunst-stack-tag:music "♫ Tocando Agora" "$(ncmpcpp --now-playing "{%a - %t}")"'
-#execute_on_song_change = "notify-send -h string:x-dunst-stack-tag:music '♫ Tocando Agora' '%a - %t'"
+# Notificação com capa:
+execute_on_song_change = "~/.config/ncmpcpp/notify.sh"
