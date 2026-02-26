@@ -67,7 +67,6 @@ focus_follows_mouse no
 
 # Sistema & Terminal
 bindsym $mod+Return       exec xfce4-terminal
-bindsym $mod+d        exec --no-startup-id rofi -show drun -theme ~/.config/rofi/config.rasi
 bindsym $mod+Control+Delete exec lxtask
 bindsym $mod+c            kill
 
@@ -79,6 +78,17 @@ bindsym $mod+t            exec telegram
 bindsym $mod+Shift+u      exec gimp
 bindsym $mod+Shift+t      exec transmission-gtk
 bindsym $mod+Shift+p      exec spotify
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#  ROFI
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+bindsym $mod+d exec --no-startup-id ~/.config/rofi/launcher.sh
+bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu.sh
+bindsym $mod+Print exec --no-startup-id ~/.config/rofi/rofi_screenshot.sh
+bindsym $mod+# exec --no-startup-id ~/.config/rofi/rofi_asroot
+bindsym $mod+w exec --no-startup-id ~/.config/rofi/rofi_windows
+bindsym $mod+b exec --no-startup-id ~/.config/rofi/rofi_bluetooth
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  NAVEGAÇÃO E LAYOUT
@@ -101,8 +111,8 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 bindsym $mod+Control+f fullscreen; exec notify-send "Tela Cheia"
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+shift+w layout tabbed
+bindsym $mod+shift+e layout toggle split
 
 # Flutuante e Scratchpad (Bloco de Notas)
 bindsym $mod+Shift+space  floating toggle
@@ -119,13 +129,13 @@ workspace_auto_back_and_forth yes
 #  WORKSPACES (ÁREAS DE TRABALHO)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set $WS1 "1: 🌐 WEB"
-set $WS2 "2: 📝 TXT"
-set $WS3 "3: 📂 DOC"
-set $WS4 "4: 🎵 MED"
+set $WS1 "1: 󰖟 WEB"
+set $WS2 "2:  TXT"
+set $WS3 "3: 󰈙 DOC"
+set $WS4 "4: 󰝚 MED"
 set $WS5 "5: ⚙️ SYS"
-set $WS6 "6: 💬 SOC"
-set $WS7 "7: 🎨 GFX"
+set $WS6 "6:  SOC"
+set $WS7 "7:  GFX"
 
 # Mudar para Workspace
 bindsym $mod+1 workspace $WS1
@@ -178,17 +188,17 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && not
 
 # FullScreen: Captura a tela inteira e salva com data/hora
 # Usamos bash -c para que o comando date funcione corretamente sem erros de sintaxe no i3
-bindsym Print exec --no-startup-id bash -c 'maim ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "📸 Screenshot Salva"'
+#bindsym Print exec --no-startup-id bash -c 'maim ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "📸 Screenshot Salva"'
 
 # Select Region: Seleciona uma área com o mouse e salva como arquivo
-bindsym ctrl+Print exec --no-startup-id bash -c 'maim -s ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "✂️ Recorte Salvo"'
+#bindsym ctrl+Print exec --no-startup-id bash -c 'maim -s ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "✂️ Recorte Salvo"'
 
 # Copy to Clipboard: Seleciona uma área e copia diretamente para a área de transferência
-bindsym Mod4+Print exec --no-startup-id bash -c 'maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado para o Clipboard"'
+#bindsym Mod4+Print exec --no-startup-id bash -c 'maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado para o Clipboard"'
 
 # Gravação de Tela (FFMPEG)
-bindsym $mod+Shift+w exec ffmpeg -f x11grab -s 1366x768 -i :0.0 -c:v libx264 -preset ultrafast -crf 20 $HOME/Videos/screencast_$(date +%d%m%y).mp4 & notify-send "🎥 Gravação Iniciada"
-bindsym $mod+Shift+e exec killall ffmpeg && notify-send "🎥 Gravação Finalizada"
+#bindsym $mod+Shift+w exec ffmpeg -f x11grab -s 1366x768 -i :0.0 -c:v libx264 -preset ultrafast -crf 20 $HOME/Videos/screencast_$(date +%d%m%y).mp4 & notify-send "🎥 Gravação Iniciada"
+#bindsym $mod+Shift+e exec killall ffmpeg && notify-send "🎥 Gravação Finalizada"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  REGRAS DE JANELAS (FLOATING)
@@ -207,7 +217,7 @@ for_window [class="Nemo"] floating enable, resize set 900 600, move position cen
 
 # Essenciais do Sistema
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
+#exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/polybar/launch.sh
