@@ -155,22 +155,22 @@ assign [class="^Telegram|discord"]           → $WS6
 assign [class="Gimp"]                        → $WS7
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#  CONTROLE DE MÍDIA E TELA
+#  CONTROLE DE VOLUME 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Aumentar Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i audio-volume-high "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]+(?=%)' | head -1)%"
+# Diminuir Volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i audio-volume-low "Volume" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '[0-9]+(?=%)' | head -1)%"
+# Mudo
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "Áudio" "Mudo Alternado"
 
-# Áudio (Usando pactl diretamente para rapidez)
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-# Mídia (Playerctl)
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-# Brilho
-bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set +10%
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#  CONTROLE DE BRILHO 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Aumentar Brilho
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10% && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i display-brightness "Brilho" "$(brightnessctl i | grep -Po '[0-9]+(?=%)')%"
+# Diminuir Brilho
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%- && notify-send -h string:x-canonical-private-synchronous:sys-notify -u low -i display-brightness "Brilho" "$(brightnessctl i | grep -Po '[0-9]+(?=%)')%"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  SCREENSHOTS E SCREENCAST (OTIMIZADOS)
