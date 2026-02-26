@@ -1,0 +1,80 @@
+configuration {
+    show-icons:                 false;
+}
+
+* {
+    /* Cores Catppuccin Mocha */
+    background:                  #1E1E2E;
+    background-alt:              #313244;
+    foreground:                  #CDD6F4;
+    selected:                    #89B4FA;
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       550px; /* Largura ajustada para 6 ícones */
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @background;
+}
+
+mainbox {
+    spacing:                     10px;
+    padding:                     20px;
+    background-color:            transparent;
+    children:                    [ "message", "listview" ];
+}
+
+message {
+    enabled:                     true;
+    margin:                      0px 0px 5px 0px;
+    padding:                     8px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    border-radius:               8px;
+}
+
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    font:                        "JetBrainsMono Nerd Font Bold 10";
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+listview {
+    enabled:                     true;
+    columns:                     6; /* TUDO EM UMA LINHA (6 APPS) */
+    lines:                       1;
+    spacing:                     12px;
+    cycle:                       true;
+    dynamic:                     true;
+    layout:                      vertical;
+    background-color:            transparent;
+}
+
+element {
+    enabled:                     true;
+    padding:                     15px 0px; /* Mais compacto */
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @background;
+}
+
+element-text {
+    /* Ícones um pouco menores (22pt) */
+    font:                        "JetBrainsMono Nerd Font 22";
+    background-color:            transparent;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

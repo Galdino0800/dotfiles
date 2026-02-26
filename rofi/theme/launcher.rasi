@@ -1,0 +1,103 @@
+/*****----- Configuration -----*****/
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               " ";
+    drun-display-format:        "{name}";
+}
+
+/*****----- Global Properties -----*****/
+* {
+    /* Cores Catppuccin Mocha */
+    background:                  #1E1E2E;
+    background-alt:              #313244;
+    foreground:                  #CDD6F4;
+    selected:                    #89B4FA;
+    font:                        "JetBrainsMono Nerd Font 10";
+}
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    width:                       750px; /* Reduzido de 900px para 750px */
+    enabled:                     true;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    spacing:                     15px;
+    padding:                     25px; /* Reduzido de 40px para 25px */
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    spacing:                     10px;
+    padding:                     12px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt { background-color: inherit; text-color: inherit; }
+entry { background-color: inherit; text-color: inherit; placeholder: "Pesquisar..."; }
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       3;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     10px; /* Reduzido de 15px para 10px */
+    background-color:            transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     8px;
+    padding:                     15px 5px; /* Reduzido de 20px para 15px */
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+    orientation:                 vertical;
+}
+
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @background;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        48px; /* Reduzido de 64px para 48px */
+    cursor:                      inherit;
+    horizontal-align:            0.5;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    font:                        "JetBrainsMono Nerd Font Bold 9"; /* Fonte levemente menor */
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

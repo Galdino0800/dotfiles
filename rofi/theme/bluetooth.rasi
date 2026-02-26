@@ -1,0 +1,65 @@
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               "";
+}
+
+* {
+    background:                  #1E1E2E;
+    background-alt:              #313244;
+    foreground:                  #CDD6F4;
+    selected:                    #89B4FA;
+    font:                        "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    width:                       500px;
+    enabled:                     true;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @background;
+}
+
+mainbox {
+    spacing:                     10px;
+    padding:                     20px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+inputbar {
+    spacing:                     10px;
+    padding:                     10px;
+    border-radius:               8px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt { background-color: inherit; text-color: inherit; }
+entry { background-color: inherit; text-color: inherit; placeholder: "Pesquisar..."; }
+
+listview {
+    columns:                     1;
+    lines:                       6; /* Reduzido de 8 para 6 */
+    spacing:                     5px;
+    background-color:            transparent;
+}
+
+element {
+    padding:                     8px;
+    border-radius:               6px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @background;
+}
+
+element-icon { size: 24px; background-color: transparent; }
+element-text { background-color: transparent; text-color: inherit; vertical-align: 0.5; }

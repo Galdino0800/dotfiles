@@ -1,0 +1,80 @@
+configuration {
+    show-icons:                 false;
+}
+
+* {
+    background:                  #1E1E2E;
+    background-alt:              #313244;
+    foreground:                  #CDD6F4;
+    selected:                    #89B4FA;
+    font:                        "JetBrainsMono Nerd Font 9"; /* Fonte reduzida para 9 */
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    width:                       750px; /* Aumentei 50px na largura para caber os nomes */
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selected;
+    background-color:            @background;
+}
+
+mainbox {
+    spacing:                     15px;
+    padding:                     25px;
+    background-color:            transparent;
+    children:                    [ "message", "listview" ];
+}
+
+message {
+    enabled:                     true;
+    margin:                      0px 0px 10px 0px;
+    padding:                     10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    border-radius:               8px;
+}
+
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    font:                        "JetBrainsMono Nerd Font Bold 10";
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+listview {
+    columns:                     5;
+    lines:                       1;
+    spacing:                     10px; /* Espaço entre botões menor */
+    cycle:                       true;
+    dynamic:                     true;
+    layout:                      vertical;
+    background-color:            transparent;
+}
+
+element {
+    enabled:                     true;
+    padding:                     18px 5px; /* Padding reduzido para ganhar espaço interno */
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+    orientation:                 vertical;
+}
+
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @background;
+}
+
+element-text {
+    /* Fonte Bold 11 para o ícone e nome ficarem nítidos mas caberem */
+    font:                        "JetBrainsMono Nerd Font Bold 11";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}

@@ -148,9 +148,9 @@ bindsym $mod+Shift+7 move container to workspace $WS7
 # Atribuições Automáticas
 assign [class="Opera|Tor Browser"]           → $WS1
 assign [class="^Subl3$|^LibreOffice"]        → $WS2
-assign [class="Thunar|Pcmanfm"]               → $WS3
-assign [class="Spotify|mpv|Tidal"]            → $WS4
-assign [class="Transmission-gtk|GParted"]     → $WS5
+assign [class="Nemo|Pcmanfm"]                → $WS3
+assign [class="Spotify|mpv|Tidal"]           → $WS4
+assign [class="Transmission-gtk|GParted"]    → $WS5
 assign [class="^Telegram|discord"]           → $WS6
 assign [class="Gimp"]                        → $WS7
 
@@ -176,10 +176,15 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 #  SCREENSHOTS E SCREENCAST (OTIMIZADOS)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Captura de Tela (maim)
-bindsym Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Full_$(date +%H%M%S).png"; maim "$FILE" && notify-send "📸 Screenshot Salva"'
-bindsym ctrl+Print exec --no-startup-id bash -c 'FILE="$HOME/Imagens/Screenshots/Area_$(date +%H%M%S).png"; maim -s "$FILE" && notify-send "✂️ Recorte Salvo"'
-bindsym $mod+Print exec --no-startup-id bash -c 'maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado para o Clipboard"'
+# FullScreen: Captura a tela inteira e salva com data/hora
+# Usamos bash -c para que o comando date funcione corretamente sem erros de sintaxe no i3
+bindsym Print exec --no-startup-id bash -c 'maim ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "📸 Screenshot Salva"'
+
+# Select Region: Seleciona uma área com o mouse e salva como arquivo
+bindsym ctrl+Print exec --no-startup-id bash -c 'maim -s ~/Imagens/Screenshots/$(date +%Y-%m-%d-%s_Screenshot).png && notify-send "✂️ Recorte Salvo"'
+
+# Copy to Clipboard: Seleciona uma área e copia diretamente para a área de transferência
+bindsym Mod4+Print exec --no-startup-id bash -c 'maim -s | xclip -selection clipboard -t image/png && notify-send "📋 Copiado para o Clipboard"'
 
 # Gravação de Tela (FFMPEG)
 bindsym $mod+Shift+w exec ffmpeg -f x11grab -s 1366x768 -i :0.0 -c:v libx264 -preset ultrafast -crf 20 $HOME/Videos/screencast_$(date +%d%m%y).mp4 & notify-send "🎥 Gravação Iniciada"
@@ -193,6 +198,7 @@ for_window [window_role="pop-up|task_dialog"] floating enable
 for_window [class="Galculator|Nitrogen|Lxappearance|Sxiv|feh|Mpv"] floating enable
 for_window [class="(?i)pavucontrol|(?i)lxtask"] floating enable
 for_window [class="Xfce4-terminal" title="Preferências"] floating enable, resize set 800 600, move position center
+for_window [class="Nemo"] floating enable, resize set 900 600, move position center
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
