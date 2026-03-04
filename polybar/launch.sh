@@ -1,14 +1,14 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-# Terminate already running bar instances
+# Mata instâncias antigas de todas as barras
 killall -q polybar
 
-# Wait until the processes have been shut down
-while pgrep -x polybar >/dev/null; do sleep 1; done
+# Aguarda os processos serem encerrados
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# Launch bar1 and bar2
+# Lança as duas barras de forma independente
+polybar top &
+polybar bottom &
 
-polybar bottom -q &
-polybar top -q &
-
-#echo "Bars launched..."
+# Feedback opcional no terminal
+echo "Barras Top e Bottom lançadas..."

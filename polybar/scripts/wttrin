@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Localização baseada no seu contexto atual
+LOCATION="Juazeiro+do+Norte"
+
+# Busca apenas o essencial: Condição e Temperatura
+# %c (ícone original) %t (temperatura)
+DATA=$(curl -s "wttr.in/${LOCATION}?format=%c+%t" | tr -d '+')
+
+if [[ -z "$DATA" ]]; then
+    echo "Indisponível"
+    exit 1
+fi
+
+# Mapeamento de ícones para a sua JetBrainsMono Nerd Font
+# Substitui os emojis do wttr pelos ícones que você gosta
+ICON=$(echo "$DATA" | awk '{print $1}')
+TEMP=$(echo "$DATA" | awk '{print $2}')
+
+case $ICON in
+    "☀️"|"󰖙") ICON="" ;;
+    "☁️"|"󰖐") ICON="" ;;
+    "⛅"|"󰖕") ICON="󰖕" ;;
+    "🌧️"|"󰖗") ICON="" ;;
+    "⛈️"|"󰖓") ICON="󰖓" ;;
+    "🌨️"|"󰼶") ICON="" ;;
+    *) ICON="" ;; # Ícone padrão caso não reconheça
+esac
+
+echo "$ICON $TEMP"
