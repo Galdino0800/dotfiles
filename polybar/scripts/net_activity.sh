@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Altere para sua interface (ex: ens33 na VM ou wlan0 no físico)
-INTERFACE="enp0s3"
+INTERFACE="wlo1"
 
 # Pega o tráfego inicial
 R1=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)

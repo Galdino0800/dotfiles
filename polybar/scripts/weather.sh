@@ -1,14 +1,18 @@
 #!/bin/bash
-# Coloque sua cidade aqui entre as aspas
-CITY="Juazeiro+do+Norte"
 
-# Busca os dados com timeout de 5 segundos
-WEATHER=$(curl -s --connect-timeout 5 "wttr.in/${CITY}?format=%c+%t" | tr -d '\n')
+# Localização: Juazeiro do Norte
+# %t = Temperatura, %c = Condição
+DATA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%c+%t")
 
-if [ -z "$WEATHER" ] || [[ "$WEATHER" == *"S/ Conexão"* ]]; then
-    echo "Indisponível"
+if [[ $DATA == *"Unknown"* ]] || [[ -z $DATA ]]; then
+    echo "N/A"
 else
-    # Tradução de ícones para Nerd Font
-    WEATHER=$(echo "$WEATHER" | sed 's/☀️/󰖙/g' | sed 's/☁️/󰖐/g' | sed 's/⛅/󰖕/g' | sed 's/🌧️/󰖗/g' | sed 's/⛈️/󰖓/g' | sed 's/🌨️/󰼶/g' | sed 's/🌫️/󰖑/g')
-    echo "$WEATHER"
+    # Remove o sinal de '+' e espaços extras
+    TEMP=$(echo "$DATA" | sed 's/+//g' | awk '{print $NF}')
+    
+    # Pega o ícone original e troca por um da Nerd Font (Opcional, mas fica mais bonito)
+    # Se preferir o ícone original do site, basta usar: echo "$DATA" | sed 's/+//g'
+    CONDITION=$(echo "$DATA" | awk '{print $1}')
+    
+    echo "$CONDITION $TEMP"
 fi
