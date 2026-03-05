@@ -1,20 +1,36 @@
 #!/usr/bin/env bash
 
-CITY="Juazeiro do Norte,BR"
-CACHE="/tmp/weather_cache"
+# Coleta os dados (Temperatura, Sensação, Vento, Condição)
+DATA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%t|%f|%w|%C")
+# Coleta a previsão para amanhã
+AMANHA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%f" | sed -n '3p' | xargs)
 
-weather=$(cat "$CACHE")
+# Separa as variáveis usando o pipe |
+IFS='|' read -r TEMP SENS VENTO COND <<< "$DATA"
 
-temp=$(echo "$weather" | jq -r '.current_condition[0].temp_C')
-feels=$(echo "$weather" | jq -r '.current_condition[0].FeelsLikeC')
-cond=$(echo "$weather" | jq -r '.current_condition[0].weatherDesc[0].value')
-wind=$(echo "$weather" | jq -r '.current_condition[0].windspeedKmph')
-tomorrow_temp=$(echo "$weather" | jq -r '.weather[1].avgtempC')
+# Limpa o sinal de + e espaços
+TEMP=$(echo $TEMP | sed 's/+//g')
+SENS=$(echo $SENS | sed 's/+//g')
+TEMP_VAL=$(echo $TEMP | grep -oE '[0-9]+') # Pega só o número para o alerta
 
-notify-send "Clima – Juazeiro do Norte" \
-"$cond
+# Monta a mensagem sem os asteriscos e com ícones Nerd Font
+MSG="Temperatura: $TEMP
+Sensação: $SENS
+Vento: $VENTO
+Condição: $COND
+Amanhã: $AMANHA"
 
-🌡️ Temperatura: $temp°C
-🤒 Sensação: $feels°C
-🌬️ Vento: ${wind} km/h
-📆 Amanhã: ${tomorrow_temp}°C"
+# Dispara a notificação principal
+notify-send "Clima em Juazeiro" "$MSG"
+
+# --- ALERTAS AUTOMÁTICOS ---
+
+# Alerta de Calor (>35°C)
+if [ ! -z "$TEMP_VAL" ] && [ "$TEMP_VAL" -gt 35 ]; then
+    notify-send -u critical "ALERTA DE CALOR" "Juazeiro está fervendo: $TEMP! Beba água."
+fi
+
+# Alerta de Chuva
+if [[ "$COND" == *"Rain"* ]] || [[ "$COND" == *"chuva"* ]] || [[ "$COND" == *"Shower"* ]]; then
+    notify-send -u normal "ALERTA DE CHUVA" "Previsão de chuva detectada em Juazeiro."
+fi

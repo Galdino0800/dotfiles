@@ -1,26 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-get_battery() {
-    device=$(bluetoothctl info | grep "Device" | awk '{print $2}')
-    if [ -n "$device" ]; then
-        upower -i $(upower -e | grep "headset") 2>/dev/null | grep percentage | awk '{print $2}'
-    fi
-}
-
-status=$(bluetoothctl show | grep "Powered" | awk '{print $2}')
-
-if [ "$status" = "yes" ]; then
-    if bluetoothctl info &>/dev/null; then
-        name=$(bluetoothctl info | grep "Name" | cut -d ' ' -f2-)
-        battery=$(get_battery)
-        if [ -n "$battery" ]; then
-            echo " $name ($battery)"
-        else
-            echo " $name"
-        fi
-    else
-        echo " On"
-    fi
+# Verifica se o bluetooth está ligado
+if [ $(bluetoothctl show | grep "Powered: yes" | wc -l) -eq 0 ]; then
+  echo "%{F#66}%{F-}" # Ícone cinza se estiver desligado
 else
-    echo " Off"
+  # Verifica se há algum dispositivo conectado
+  if [ $(bluetoothctl info | grep "Connected: yes" | wc -l) -eq 0 ]; then
+    echo "" # Ícone normal se estiver ligado mas sem nada
+  else
+    # Opcional: Mostra o nome do dispositivo conectado (ex: Fone)
+    DEVICE=$(bluetoothctl info | grep "Name" | cut -d ' ' -f 2-)
+    echo " $DEVICE"
+  fi
 fi
