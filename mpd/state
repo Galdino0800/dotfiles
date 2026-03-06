@@ -1,0 +1,21 @@
+sw_volume: 98
+audio_device_state:1:PulseAudio
+audio_device_state:1:Visualizer feed
+state: pause
+current: 1
+time: 321.007
+random: 0
+repeat: 0
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0
+mixrampdelay: -1
+lastloadedplaylist: 
+playlist_begin
+0:20 Grandes Sucessos De Biquini Cavadao/No Mundo Da Lua - Biquini Cavadão.flac
+1:Vampire Survivors - Ode to Castlevania (Soundtrack)/20 - Abandoned Castle.mp3
+2:Vampire Survivors - Ode to Castlevania (Soundtrack)/16 - Aquarius.mp3
+3:Vampire Survivors - Ode to Castlevania (Soundtrack)/09 - Lost Painting.mp3
+4:Vampire Survivors - Ode to Castlevania (Soundtrack)/24 - Wood Carving Partita.mp3
+playlist_end
