@@ -30,7 +30,8 @@ alias zshconf="subl3 ~/.config/.dotfiles/zsh/.zshrc"
 alias i3conf="subl3 ~/.config/.dotfiles/i3/config"
 alias polyconf="subl3 ~/.config/.dotfiles/polybar/config.ini"
 alias dunstconf="subl3 ~/.config/.dotfiles/dunst/dunstrc"
-
+# Atalho para subir tudo com um único comando
+alias gpush='git -C /home/ghost/dotfiles add . && git -C /home/ghost/dotfiles commit -m "update: backup automático" && git -C /home/ghost/dotfiles push origin main'
 alias ncmpcpp="ncmpcpp"
 alias music="ncmpcpp"
 alias fetch="pfetch"
