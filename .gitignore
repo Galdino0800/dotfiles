@@ -1,0 +1,20 @@
+# --- MPD & NCMPCPP ---
+# Ignorar a base de dados e logs que o MPD cria sozinho
+mpd/database
+mpd/log
+mpd/pid
+mpd/state
+mpd/sticker.sql
+
+# --- ZSH ---
+# Ignorar ficheiros de cache do Zsh que deixam o Git lento
+.zcompdump*
+.cache/
+.history
+
+# --- SISTEMA ---
+# Ignorar ficheiros temporários e miniaturas
+.DS_Store
+Thumbs.db
+*~
+*.swp
