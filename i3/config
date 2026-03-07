@@ -214,9 +214,11 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 for_window [window_role="pop-up|task_dialog"] floating enable
 for_window [class="Galculator|Nitrogen|Lxappearance|Sxiv|feh|Mpv"] floating enable
 for_window [class="(?i)pavucontrol|(?i)lxtask"] floating enable
-for_window [class="xfce4-terminal" title="Preferências"] floating enable, resize set 600 400, move position center
+for_window [class="Xfce4-terminal" instance="xfce4-terminal-settings"] floating enable
 for_window [class="Xfce4-terminal"] floating enable, resize set 600 400, move position center
 for_window [class="Nemo|Pcmanfm"] floating enable, resize set 900 500, move position center
+for_window [class="Pcmanfm" instance="dialog"] floating enable
+for_window [class="Pcmanfm" window_role="pop-up"] floating enable
 for_window [class="Gsimplecal"] floating enable, move position mouse
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -226,7 +228,7 @@ for_window [class="Gsimplecal"] floating enable, move position mouse
 # Essenciais do Sistema
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
-exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
+exec --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id bash ~/.config/polybar/launch.sh
 exec --no-startup-id xautolock -time 5 -locker ~/dotfiles/i3/ilockit/lock.sh

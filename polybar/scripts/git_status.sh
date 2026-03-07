@@ -1,28 +1,25 @@
 #!/bin/bash
 REPO="/home/ghost/dotfiles"
 
-# Se o script for chamado com "check", ele faz o fetch e avisa
+# Se clicar, ele vai no servidor espiar (Fetch)
 if [ "$1" == "check" ]; then
-    notify-send "󰊤 Git" "Verificando atualizações no GitHub..." -i distritubutor-logo-archlinux
+    notify-send "󰊤 Git" "Sincronizando com GitHub..." -i git
     git -C "$REPO" fetch origin > /dev/null 2>&1
 fi
 
-if [ ! -d "$REPO/.git" ]; then
-    echo "Erro Path"
-    exit
-fi
+# 1. Verifica se você editou arquivos e NÃO deu gpush (Local)
+MODIFIED=$(git -C "$REPO" status --porcelain | wc -l)
 
-# Verifica se estamos atrás (updates para baixar) ou na frente (updates para subir)
-STATUS_AHEAD=$(git -C "$REPO" rev-list --count HEAD..origin/main 2>/dev/null)
-STATUS_BEHIND=$(git -C "$REPO" rev-list --count origin/main..HEAD 2>/dev/null)
+# 2. Verifica se o GitHub tem coisas que você não baixou (Remoto)
+AHEAD=$(git -C "$REPO" rev-list --count HEAD..origin/main 2>/dev/null)
 
-if [ "$STATUS_AHEAD" -gt 0 ]; then
-    echo "Pendente ↑"
-    [ "$1" == "check" ] && notify-send "󰊤 Git" "Você tem $STATUS_AHEAD commits para subir (gpush)!"
-elif [ "$STATUS_BEHIND" -gt 0 ]; then
-    echo "Update ↓"
-    [ "$1" == "check" ] && notify-send "󰊤 Git" "Há atualizações no servidor para baixar!"
+if [ "$MODIFIED" -gt 0 ]; then
+    echo "Modificado ($MODIFIED)"
+    [ "$1" == "check" ] && notify-send "󰊤 Git" "Você editou $MODIFIED arquivos. Rode gpush!"
+elif [ "$AHEAD" -gt 0 ]; then
+    echo "Update ($AHEAD) ↓"
+    [ "$1" == "check" ] && notify-send "󰊤 Git" "Há novidades no servidor!"
 else
     echo "Sincronizado"
-    [ "$1" == "check" ] && notify-send "󰊤 Git" "Tudo em dia!"
+    [ "$1" == "check" ] && notify-send "󰊤 Git" "Tudo limpo e salvo!"
 fi
