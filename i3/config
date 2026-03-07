@@ -130,12 +130,14 @@ workspace_auto_back_and_forth yes
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set $WS1 "1: 󰖟 "
-set $WS2 "2:  "
+set $WS2 "2:  "
 set $WS3 "3: 󰈙 "
-set $WS4 "4: 󰝚 "
-set $WS5 "5: ⚙️ "
+set $WS4 "4:  "
+set $WS5 "5: 󰇚 "
 set $WS6 "6:  "
-set $WS7 "7:  "
+set $WS8 "8:  "
+set $WS9 "9:  "
+set $WS10 "10:  "
 
 #set $WS1 "1: 󰖟 WEB"
 #set $WS2 "2:  TXT"
@@ -165,8 +167,8 @@ bindsym $mod+Shift+7 move container to workspace $WS7
 
 # Atribuições Automáticas
 assign [class="Opera|Tor Browser"]                                  → $WS1
-assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
-assign [class="Nemo|Pcmanfm"]                                       → $WS3
+assign [class="Nemo|Pcmanfm"]                                       → $WS2
+assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS3
 assign [class="Spotify|mpv|Tidal|high-tide"]                        → $WS4
 assign [class="Transmission-gtk|GParted"]                           → $WS5
 assign [class="^Telegram|discord"]                                  → $WS6
@@ -227,7 +229,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id bash ~/.config/polybar/launch.sh
-exec --no-startup-id xautolock -time 5 -locker ~/dotfiles/scripts/lock.sh
+exec --no-startup-id xautolock -time 5 -locker ~/dotfiles/i3/ilockit/lock.sh
 
 
 # Teclado e Mouse
