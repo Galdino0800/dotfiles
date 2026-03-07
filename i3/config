@@ -77,7 +77,7 @@ bindsym $mod+Shift+s      exec subl3
 bindsym $mod+t            exec Telegram
 bindsym $mod+Shift+u      exec gimp
 bindsym $mod+Shift+t      exec transmission-gtk
-bindsym $mod+Shift+p      exec spotify
+bindsym $mod+Shift+p      exec high-tide
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  ROFI
@@ -164,14 +164,15 @@ bindsym $mod+Shift+6 move container to workspace $WS6
 bindsym $mod+Shift+7 move container to workspace $WS7
 
 # Atribuições Automáticas
-assign [class="Opera|Tor Browser"]                    → $WS1
-assign [class="Sublime_text|^LibreOffice|mousepad"]   → $WS2
-assign [class="Nemo|Pcmanfm"]                         → $WS3
-assign [class="Spotify|mpv|Tidal|High-tide"]          → $WS4
-assign [class="Transmission-gtk|GParted"]             → $WS5
-assign [class="^Telegram|discord"]                    → $WS6
-assign [class="Gimp"]                                 → $WS7
-assign [class="lxappearance"]                         → $WS7
+assign [class="Opera|Tor Browser"]                                  → $WS1
+assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
+assign [class="Nemo|Pcmanfm"]                                       → $WS3
+assign [class="Spotify|mpv|Tidal|high-tide"]                        → $WS4
+assign [class="Transmission-gtk|GParted"]                           → $WS5
+assign [class="^Telegram|discord"]                                  → $WS6
+assign [class="Gimp"]                                               → $WS7
+assign [class="lxappearance"]                                       → $WS8
+assign [class="steam"]                                              → $WS9
 
 # Para saber qual o nome da janela: xprop | grep WM_CLASS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -211,9 +212,9 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 for_window [window_role="pop-up|task_dialog"] floating enable
 for_window [class="Galculator|Nitrogen|Lxappearance|Sxiv|feh|Mpv"] floating enable
 for_window [class="(?i)pavucontrol|(?i)lxtask"] floating enable
-for_window [class="xfce4-terminal" title="Preferências"] floating enable, resize set 800 600, move position center
-for_window [class="Xfce4-terminal"] floating enable, resize set 800 600, move position center
-for_window [class="Nemo"] floating enable, resize set 900 600, move position center
+for_window [class="xfce4-terminal" title="Preferências"] floating enable, resize set 600 400, move position center
+for_window [class="Xfce4-terminal"] floating enable, resize set 600 400, move position center
+for_window [class="Nemo|Pcmanfm"] floating enable, resize set 900 500, move position center
 for_window [class="Gsimplecal"] floating enable, move position mouse
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -226,7 +227,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec_always --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id bash ~/.config/polybar/launch.sh
-exec --always nm-applet
+exec --no-startup-id xautolock -time 5 -locker ~/dotfiles/scripts/lock.sh
 
 
 # Teclado e Mouse

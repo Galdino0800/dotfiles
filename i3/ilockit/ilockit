@@ -1,9 +1,25 @@
 #!/usr/bin/env bash
 
-icon="$HOME/.config/i3/ilockit/lock-big.png"
+# Caminho corrigido para img.png
+icon="/home/ghost/dotfiles/i3/ilockit/img.png"
 tmpbg='/tmp/screen.png'
 
+# 1. Tira o print
 scrot "$tmpbg"
-convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
-convert "$tmpbg" "$icon" -gravity center -composite -matte "$tmpbg"
-i3lock -u -i "$tmpbg"
+
+# 2. Pixeliza o fundo
+magick "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
+
+# 3. Sobrepõe o ícone (img.png) no centro
+if [ -f "$icon" ]; then
+    # O comando composite coloca o ícone centralizado
+    magick composite -gravity center "$icon" "$tmpbg" "$tmpbg"
+else
+    echo "Erro: Arquivo $icon não encontrado!"
+fi
+
+# 4. Trava a tela
+i3lock -i "$tmpbg"
+
+# 5. Limpa a imagem temporária
+rm "$tmpbg"
