@@ -5,7 +5,7 @@ theme="powermenu"
 
 uptime="System: UP - $(uptime -p | sed -e 's/up //g')"
 
-# Ícone e nome juntos
+# Ícones e nomes
 lock="󰂭 Bloquear"
 suspend=" Suspender"
 logout="󰍃 Sair"
@@ -15,16 +15,30 @@ shutdown=" Desligar"
 run_rofi() {
 	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | \
 		rofi -dmenu \
-			 -p "Adeus" \
+			 -p "Até logo" \
 			 -mesg "$uptime" \
 			 -theme ${dir}/${theme}.rasi
 }
 
 chosen="$(run_rofi)"
+
 case ${chosen} in
-    $shutdown) systemctl poweroff ;;
-    $reboot) systemctl reboot ;;
-    $lock) i3lock ;;
-    $suspend) mpc -q pause; amixer set Master mute; systemctl suspend ;;
-    $logout) i3-msg exit ;;
+    $lock)
+        # Usando o caminho absoluto para evitar erros de diretório
+        bash /home/ghost/.config/i3/ilockit/ilockit &
+        ;;
+    $suspend)
+        mpc -q pause
+        amixer set Master mute
+        bash /home/ghost/.config/i3/ilockit/ilockit & sleep 1 && systemctl suspend
+        ;;
+    $logout)
+        i3-msg exit
+        ;;
+    $reboot)
+        systemctl reboot
+        ;;
+    $shutdown)
+        systemctl poweroff
+        ;;
 esac
