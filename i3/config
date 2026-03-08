@@ -173,8 +173,8 @@ assign [class="Spotify|mpv|Tidal|high-tide"]                        → $WS4
 assign [class="Transmission-gtk|GParted"]                           → $WS5
 assign [class="^Telegram|discord"]                                  → $WS6
 assign [class="Gimp"]                                               → $WS7
-assign [class="lxappearance"]                                       → $WS8
-assign [class="steam"]                                              → $WS9
+assign [class="lxappearance|Steam"]                                 → $WS8
+# assign [class="steam"]                                              → $WS9
 
 # Para saber qual o nome da janela: xprop | grep WM_CLASS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,6 +220,11 @@ for_window [class="Nemo|Pcmanfm"] floating enable, resize set 900 500, move posi
 for_window [class="Pcmanfm" instance="dialog"] floating enable
 for_window [class="Pcmanfm" window_role="pop-up"] floating enable
 for_window [class="Gsimplecal"] floating enable, move position mouse
+
+# Forçar janelas secundárias da Steam a abrir no modo flutuante
+for_window [class="^Steam$" title="^Propriedades"] floating enable
+for_window [class="^Steam$" title="^Amigos"] floating enable
+for_window [class="^Steam$" title="^Configurações"] floating enable
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  AUTOSTART (ORDEM LÓGICA)
