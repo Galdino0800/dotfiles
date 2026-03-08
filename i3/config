@@ -220,6 +220,8 @@ for_window [class="Nemo|Pcmanfm"] floating enable, resize set 900 500, move posi
 for_window [class="Pcmanfm" instance="dialog"] floating enable
 for_window [class="Pcmanfm" window_role="pop-up"] floating enable
 for_window [class="Gsimplecal"] floating enable, move position mouse
+for_window [class="Bitwarden"] floating enable
+
 
 # Forçar janelas secundárias da Steam a abrir no modo flutuante
 for_window [class="^Steam$" title="^Propriedades"] floating enable
