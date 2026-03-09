@@ -167,8 +167,8 @@ bindsym $mod+Shift+7 move container to workspace $WS7
 
 # Atribuições Automáticas
 assign [class="Opera|Tor Browser"]                                  → $WS1
-assign [class="Nemo|Pcmanfm"]                                       → $WS2
-assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS3
+assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
+assign [class="Nemo|Pcmanfm"]                                       → $WS3
 assign [class="Spotify|mpv|Tidal|high-tide"]                        → $WS4
 assign [class="Transmission-gtk|GParted"]                           → $WS5
 assign [class="^Telegram|discord"]                                  → $WS6
