@@ -77,7 +77,7 @@ bindsym $mod+Shift+s      exec subl3
 bindsym $mod+t            exec Telegram
 bindsym $mod+Shift+u      exec gimp
 bindsym $mod+Shift+t      exec transmission-gtk
-bindsym $mod+Shift+p      exec high-tide
+bindsym $mod+Shift+h      exec high-tide
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  ROFI
@@ -221,6 +221,7 @@ for_window [class="Pcmanfm" instance="dialog"] floating enable
 for_window [class="Pcmanfm" window_role="pop-up"] floating enable
 for_window [class="Gsimplecal"] floating enable, move position mouse
 for_window [class="Bitwarden"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
 
 
 # Forçar janelas secundárias da Steam a abrir no modo flutuante
