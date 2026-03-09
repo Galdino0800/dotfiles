@@ -174,7 +174,7 @@ assign [class="Transmission-gtk|GParted"]                           → $WS5
 assign [class="^Telegram|discord"]                                  → $WS6
 assign [class="Gimp"]                                               → $WS7
 assign [class="lxappearance|Steam"]                                 → $WS8
-# assign [class="steam"]                                              → $WS9
+# assign [class="steam"]                                            → $WS9
 
 # Para saber qual o nome da janela: xprop | grep WM_CLASS
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
