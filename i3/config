@@ -222,7 +222,7 @@ for_window [class="Pcmanfm" window_role="pop-up"] floating enable
 for_window [class="Gsimplecal"] floating enable, move position mouse
 for_window [class="Bitwarden"] floating enable, move position center
 for_window [class="Nm-connection-editor"] floating enable
-for_window [class="tidal-hifi"] floating enable, move position center
+#for_window [class="tidal-hifi"] floating enable, move position center
 
 
 # Forçar janelas secundárias da Steam a abrir no modo flutuante
