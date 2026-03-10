@@ -26,6 +26,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # --- ALIASES PERSONALIZADOS ---
+alias limpar='sudo pacman -Rns $(pacman -Qdtq) && sudo paccache -r && yay -Sc && yay -Yc'
 alias zshconf="subl3 ~/.config/.dotfiles/zsh/.zshrc"
 alias i3conf="subl3 ~/.config/.dotfiles/i3/config"
 alias polyconf="subl3 ~/.config/.dotfiles/polybar/config.ini"
