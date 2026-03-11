@@ -1,47 +1,46 @@
 [global]
-    ### EXIBIÇÃO ###
-    monitor = 0
-    follow = mouse
-    font = JetBrains Mono 10
+    ### EXIBIÇÃO E FONTE ###
+    font = JetBrains Mono 9
     markup = yes
-    format = "\n<b>%s</b>\n%b"
+    # Removemos o \n extra para o texto subir um pouco, já que a caixa está menor
+    format = "<b>%s</b>\n%b"
     alignment = center
     
-  ### GEOMETRIA ###
-    # Reduzido de 380 para 300 para ficar mais compacto
-    width = 300
+    ### GEOMETRIA E POSIÇÃO ###
+    # Largura reduzida para ser mais discreta
+    width = 280
+    # Altura dinâmica: mínima 0, máxima 100
+    height = (0, 100)
     
-    # Altura um pouco menor para acompanhar a largura
-    height = (130, 130)
-    
-    # Mantendo a posição
-    offset = (10, 50)
+    offset = (15, 60)
     origin = top-right
     
-    # Reduzi um pouco os paddings para não sobrar muito espaço vazio
-    padding = 12
+    # Menos espaçamento interno para economizar espaço
+    padding = 10
     horizontal_padding = 12
-    corner_radius = 10
+    corner_radius = 8
 
-    ### ÍCONES ###
+    ### ASPECTO VISUAL ###
+    frame_width = 2
+    frame_color = "#81a1c1"
+
+    ### ÍCONES (Versão Mini) ###
     icon_position = left
-    # Mantive 80 para a imagem não perder o detalhe
-    max_icon_size = 80
-    min_icon_size = 80
+    # Reduzido de 80 para 64 (tamanho clássico)
+    max_icon_size = 64
+    min_icon_size = 64
     
-    ### INTERAÇÃO ###
-    mouse_left_click = close_current
-    mouse_right_click = close_all
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
 
 [urgency_low]
     background = "#2E3440"
     foreground = "#ECEFF4"
-    timeout = 5
+    timeout = 4
 
 [urgency_normal]
     background = "#2E3440"
     foreground = "#ECEFF4"
-    timeout = 8
+    timeout = 6
 
 [urgency_critical]
     background = "#2E3440"
