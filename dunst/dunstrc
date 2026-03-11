@@ -7,23 +7,25 @@
     format = "\n<b>%s</b>\n%b"
     alignment = center
     
-    ### GEOMETRIA ###
-    width = 380
-    # Se (150, 150) falhou silenciosamente, vamos tentar a sintaxe de altura dinâmica de novo
-    height = 150
+  ### GEOMETRIA ###
+    # Reduzido de 380 para 300 para ficar mais compacto
+    width = 300
+    
+    # Altura um pouco menor para acompanhar a largura
+    height = (130, 130)
+    
+    # Mantendo a posição
     offset = (10, 50)
     origin = top-right
-    padding = 18
-    horizontal_padding = 15
+    
+    # Reduzi um pouco os paddings para não sobrar muito espaço vazio
+    padding = 12
+    horizontal_padding = 12
     corner_radius = 10
-
-    ### CORES E BORDA ###
-    frame_width = 2
-    frame_color = "#81a1c1"
-    separator_color = frame
 
     ### ÍCONES ###
     icon_position = left
+    # Mantive 80 para a imagem não perder o detalhe
     max_icon_size = 80
     min_icon_size = 80
     
