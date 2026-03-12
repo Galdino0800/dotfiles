@@ -78,6 +78,7 @@ bindsym $mod+shift+t      exec Telegram
 bindsym $mod+Shift+g      exec gimp
 bindsym $mod+Shift+f      exec transmission-gtk
 bindsym $mod+t            exec tidal-hifi
+bindsym $mod+y            exec YouTube Music Desktop App
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  ROFI
@@ -169,7 +170,7 @@ bindsym $mod+Shift+7 move container to workspace $WS7
 assign [class="Opera|Tor Browser"]                                  → $WS1
 assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
 assign [class="Nemo|Pcmanfm"]                                       → $WS3
-assign [class="Spotify|mpv|tidal-hifi"]                             → $WS4
+assign [class="Spotify|mpv|tidal-hifi|YouTube Music Desktop App"]   → $WS4
 assign [class="Transmission-gtk|GParted"]                           → $WS5
 assign [class="^Telegram|discord"]                                  → $WS6
 assign [class="Gimp"]                                               → $WS7
