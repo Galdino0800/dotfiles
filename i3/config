@@ -241,7 +241,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec --no-startup-id redshift -c ~/.config/redshift/redshift.conf
 exec --no-startup-id nitrogen --restore
 exec_always --no-startup-id bash ~/.config/polybar/launch.sh
-exec --no-startup-id xautolock -time 5 -locker ~/dotfiles/i3/ilockit/lock.sh
+exec --no-startup-id xautolock -time 5 -locker /home/ghost/.config/i3/ilockit/ilockit
 
 
 # Teclado e Mouse
