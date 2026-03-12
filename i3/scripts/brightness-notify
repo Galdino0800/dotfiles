@@ -1,32 +1,25 @@
 #!/bin/bash
 
-# Create a short delay so changes in brightness can be registered
-sleep 0.2
+# 1. Pega o brilho (Garante que seja apenas o número)
+BRIGHTNESS=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+[ -z "$BRIGHTNESS" ] && BRIGHTNESS=0
 
-# Get the brightness percentage:
-BRIGHTNESS_VALUE=$(xbacklight -get)
+# 2. Configuração da Barra (10 blocos)
+# Usamos uma string de referência em vez de comandos complexos de printf
+full="▮▮▮▮▮▮▮▮▮▮"
+empty="▯▯▯▯▯▯▯▯▯▯"
 
-# Round the brightness percentage:
-LC_ALL=C
-BRIGHTNESS_VALUE=$(printf "%.*f" 0 $BRIGHTNESS_VALUE)
+# Calcula quantos blocos preenchidos (0 a 10)
+num=$(( BRIGHTNESS / 10 ))
 
-BARS_N=$(( $BRIGHTNESS_VALUE / 5 ))
-SPACES_N=$((20 - BARS_N))
+# Monta a barra cortando as strings acima
+BARS="${full:0:num}${empty:0:10-num}"
 
-printf_n_times() {
- str=$1
- num=$2
- printf -v v "%-*s" "$num" ""
- echo "${v// /$str}"
-}
+# 3. Ícone Dinâmico
+if [ "$BRIGHTNESS" -le 30 ]; then ICON="󰃞";
+elif [ "$BRIGHTNESS" -le 70 ]; then ICON="󰃟";
+else ICON="󰃠 "; fi
 
-BARS=$(printf_n_times "▮" "${BARS_N}")
-SPACES=$(printf_n_times "▯" "${SPACES_N}")
-
-
-
-# Kill previous notifications so the brightness notifications don't pile up:
-killall -q dunst
-
-# Send the notification with the icon:
-notify-send "Brightness: ${BARS}${SPACES}" -t 1000
+# 4. Envia a notificação (ID 994)
+# Removi qualquer comando que possa imprimir lixo no terminal
+notify-send -r 994 -t 1000 -a "Sistema" "$ICON  $BARS  $BRIGHTNESS%"

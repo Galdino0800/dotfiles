@@ -1,39 +1,32 @@
 #!/bin/bash
 
-# Script to create pop-up notification when volume changes.
+# 1. Pega as informações do ALSA em uma única chamada para ser mais rápido
+AMIXER=$(amixer sget Master)
+VOLUME=$(echo "$AMIXER" | grep -Po '[0-9]+(?=%)' | head -n 1)
+MUTE=$(echo "$AMIXER" | grep -q "\[off\]" && echo "yes" || echo "no")
 
-# Create a delay so the change in volume can be registered:
-sleep 0.05
+# 2. Configuração da barra (20 blocos)
+BARS_N=$(( VOLUME / 5 ))
+SPACES_N=$(( 20 - BARS_N ))
 
-# Get the volume and check if muted or not (STATE):
-VOLUME=$(amixer sget Master      | \
-         egrep -o -m 1 "[0-9]+%" | \
-         egrep -o "[0-9]+")
-STATE=`amixer sget Master          | \
-       egrep -m 1 'Playback.*?\[o' | \
-       egrep -o '\[o.+\]'`
+# Criando a barra de forma mais eficiente (sem loops complexos)
+BARS=$(printf "▮%.0s" $(seq 1 $BARS_N))
+SPACES=$(printf "▯%.0s" $(seq 1 $SPACES_N))
 
-# To avoid many notifications piling on top of eachother when pressing the
-# volume buttons multiple times, kill the notification daemon each time.
-killall -q dunst
+# 3. Identificador único para a notificação (evita pilhas de pop-ups)
+ID=995
 
-BARS_N=$(( $VOLUME / 5 ))
-SPACES_N=$((20 - BARS_N))
-
-printf_n_times() {
- str=$1
- num=$2
- printf -v v "%-*s" "$num" ""
- echo "${v// /$str}"
-}
-
-BARS=$(printf_n_times "▮" "${BARS_N}")
-SPACES=$(printf_n_times "▯" "${SPACES_N}")
-
-# Have a different symbol for varying volume levels:
-if [[ $STATE != '[off]' ]]; then
-      notify-send " <b>${BARS}</b>${SPACES}" -t 1000
+if [ "$MUTE" = "yes" ]; then
+    notify-send -r $ID -t 1500 -a "Volume" "󰝟 Mute"
 else
-      # If volume is muted, display the mute sybol:
-      notify-send " Mute" -t 1000
+    # Escolhe o ícone baseado no nível
+    if [ "$VOLUME" -le 30 ]; then ICON="󰕿";
+    elif [ "$VOLUME" -le 70 ]; then ICON="󰖀";
+    else ICON="󰕾"; fi
+
+    # Envia a notificação substituindo a anterior instantaneamente
+    notify-send -r $ID -t 1500 -a "Volume" "$ICON  <b>${BARS}${SPACES}</b>" "Volume: ${VOLUME}%"
 fi
+
+# 4. Força a Polybar a atualizar o módulo de volume na hora
+pkill -USR1 polybar

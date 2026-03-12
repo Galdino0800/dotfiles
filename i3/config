@@ -196,11 +196,11 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 #  CONTROLE DE BRILHO 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Aumentar brilho
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-# Diminuir brilho
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+# Aumentar Brilho
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && ~/.config/i3/scripts/brightness-notify
 
+# Diminuir Brilho
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- && ~/.config/i3/scripts/brightness-notify
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #  SCREENSHOTS E SCREENCAST (OTIMIZADOS)
