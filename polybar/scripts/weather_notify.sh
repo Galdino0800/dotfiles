@@ -1,40 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Garante que a notificação encontre a tela do notebook
-export DISPLAY=:0
-export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
+# Busca o clima de Juazeiro do Norte
+# Usamos o formato 1 para pegar dados detalhados se necessário
+RESPONSE=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%c+%t+%f")
 
-# Coleta os dados de Juazeiro do Norte (Temp, Sensação, Vento, Condição)
-DATA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%t|%f|%w|%C")
-# Coleta previsão de amanhã
-AMANHA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%f" | sed -n '3p' | xargs)
-
-# Separa as variáveis pelo pipe |
-IFS='|' read -r TEMP SENS VENTO COND <<< "$DATA"
-
-# Limpa sinais de + e espaços extras
-TEMP=$(echo $TEMP | sed 's/+//g')
-SENS=$(echo $SENS | sed 's/+//g')
-TEMP_VAL=$(echo $TEMP | grep -oE '[0-9]+' | head -1)
-
-# Monta a mensagem final sem as estrelas (**)
-MSG="Temperatura: $TEMP
-Sensacao: $SENS
-Vento: $VENTO
-Condicao: $COND
-Amanha: $AMANHA"
-
-# Dispara a notificação (dura 8 segundos)
-notify-send -t 8000 "Clima em Juazeiro" "$MSG"
-
-# --- ALERTAS AUTOMÁTICOS ---
-
-# Alerta de Calor Crítico (>= 35°C)
-if [ ! -z "$TEMP_VAL" ] && [ "$TEMP_VAL" -ge 35 ]; then
-    notify-send -u critical "ALERTA DE CALOR" "Juazeiro atingiu $TEMP! Nao esqueca de beber agua."
+# O PULO DO GATO: Se a resposta contiver "render failed", a gente ignora.
+if [[ "$RESPONSE" == *"render failed"* || -z "$RESPONSE" ]]; then
+    TEMP="Indisponível"
+    SENSACAO="--"
+    ICON="󰖐"
+else
+    # Se estiver ok, extrai os dados (ajuste conforme seu script original)
+    ICON=$(echo $RESPONSE | awk '{print $1}')
+    TEMP=$(echo $RESPONSE | awk '{print $2}')
+    SENSACAO=$(echo $RESPONSE | awk '{print $3}')
 fi
 
-# Alerta de Chuva
-if [[ "$COND" == *"Rain"* ]] || [[ "$COND" == *"Shower"* ]] || [[ "$COND" == *"Storm"* ]]; then
-    notify-send -u normal "ALERTA DE CHUVA" "Previsao de chuva em Juazeiro: $COND"
-fi
+# Envia para a notificação (Dunst)
+notify-send -a "Clima" "Clima em Juazeiro" "Temperatura: $TEMP\nSensação: $SENSACAO" -i weather-clear

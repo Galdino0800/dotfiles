@@ -1,11 +1,14 @@
 #!/bin/bash
 
-# Força IPv4 e define um tempo limite de 5 segundos para não travar a barra
-DATA=$(curl -4 -s --connect-timeout 5 "wttr.in/Juazeiro+do+Norte?format=%c+%t")
+# 1. Tenta pegar o clima usando o formato 3 (mais leve do wttr.in)
+# O timeout de 5 segundos evita que a barra trave se o site demorar
+WEATHER=$(curl -s --connect-timeout 5 "wttr.in/Juazeiro+do+Norte?format=3")
 
-if [ $? -ne 0 ] || [[ $DATA == *"Unknown"* ]] || [ -z "$DATA" ]; then
-    echo "N/A"
+# 2. Se a resposta contiver a palavra "render" ou "missing" (o erro que você está vendo), 
+# ou se vier vazia, mostra N/A para não quebrar a barra.
+if [[ "$WEATHER" == *"render"* || "$WEATHER" == *"missing"* || -z "$WEATHER" ]]; then
+    echo "󰖐 N/A"
 else
-    # Remove o sinal de '+' e garante que a saída esteja limpa
-    echo "$DATA" | sed 's/+//g' | xargs
+    # Limpa a resposta e exibe (Ex: Juazeiro do Norte: ☀️ +32°C)
+    echo "$WEATHER" | sed 's/Juazeiro do Norte: //' | xargs
 fi
