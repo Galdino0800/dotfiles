@@ -87,7 +87,7 @@ bindsym $mod+y            exec YouTube Music Desktop App
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launcher.sh
 bindsym $mod+x exec --no-startup-id ~/.config/rofi/powermenu.sh
 bindsym $mod+Insert exec --no-startup-id ~/.config/rofi/rofi_screenshot.sh
-bindsym $mod+g exec --no-startup-id ~/.config/rofi/rofi_asroot
+#bindsym $mod+g exec --no-startup-id ~/.config/rofi/rofi_asroot
 bindsym $mod+w exec --no-startup-id ~/.config/rofi/rofi_windows
 #bindsym $mod+b exec --no-startup-id ~/.config/rofi/rofi_bluetooth
 
@@ -226,6 +226,7 @@ for_window [class="Gsimplecal"] floating enable, move position mouse
 for_window [class="Bitwarden"] floating enable, move position center
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="steamwebhelper"] floating enable, move position center
+for_window [class="SimpleScreenRecorder|mpv"] floating enable, resize set 900 500, move position center
 #for_window [class="tidal-hifi"] floating enable, move position center
 
 
@@ -257,6 +258,9 @@ exec --no-startup-id xset m 5 1        # Velocidade do mouse
 exec --no-startup-id mpd ~/.config/mpd/mpd.conf
 exec --no-startup-id xautolock 
 exec --no-startup-id nm-applet
+
+# Inicia o SSR escondido na bandeja (systray)
+exec --no-startup-id simplescreenrecorder --start-hidden
 
 # Notificação de Boas Vindas
 exec --no-startup-id notify-send -t 5000 "Bem-vindo, Galdino!" "Sistema carregado com sucesso."
