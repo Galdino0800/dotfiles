@@ -1,21 +1,26 @@
 #!/bin/bash
 
-# Busca: Condição (%c), Temperatura (%t), Sensação (%f), Vento (%w) e Umidade (%h)
-# O "Juazeiro+do+Norte" garante que pegue a cidade certa.
-DATA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%c+%t+%w+%h")
+# Busca os dados detalhados (Temperatura, Vento, Umidade, Sensação)
+DATA=$(curl -s "wttr.in/Juazeiro+do+Norte?format=%c+%t+%w+%h+%f")
 
-# 1. Filtro de Segurança (Se o site mandar o erro de 'render failed' ou vier vazio)
 if [[ "$DATA" == *"render"* || -z "$DATA" ]]; then
-    echo "󰖐 Indisponível"
+    notify-send -a "Clima" "󰖐 Erro de Conexão" "Não foi possível carregar o clima agora."
 else
-    # 2. Organiza os dados
-    # O wttr.in manda algo como: ☀️ +32°C ↙15km/h 45%
+    # Extrai cada pedaço (awk é nosso amigo aqui)
     ICON=$(echo "$DATA" | awk '{print $1}')
     TEMP=$(echo "$DATA" | awk '{print $2}')
     VENTO=$(echo "$DATA" | awk '{print $3}')
     UMID=$(echo "$DATA" | awk '{print $4}')
+    SENS=$(echo "$DATA" | awk '{print $5}')
 
-    # 3. Saída para a Polybar ou Notificação
-    # Formato: ☀️ 32°C | 󰖝 15km/h | 󰖐 45%
-    echo "$ICON $TEMP | 󰖝 $VENTO | 󰍟 $UMID"
+    # Monta a mensagem bonita com quebras de linha (\n)
+    # Usamos tags <b> para negrito (se o seu Dunst aceitar markup)
+    TITULO=" Clima em Juazeiro do Norte"
+    MSG="<b>Condição:</b> $ICON $TEMP\n"
+    MSG+="<b>Sensação:</b> $SENS\n"
+    MSG+="<b>Vento:</b> 󰖝 $VENTO\n"
+    MSG+="<b>Umidade:</b> 󰍟 $UMID"
+
+    # Envia a notificação com um ícone de sistema (opcional)
+    notify-send -a "Weather" -u normal "$TITULO" "$MSG"
 fi
