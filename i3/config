@@ -170,7 +170,7 @@ bindsym $mod+Shift+9 move container to workspace $WS9
 
 # Atribuições Automáticas
 assign [class="Opera|Tor Browser"]                                  → $WS1
-assign [class="sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
+assign [class="Sublime_text|^LibreOffice|mousepad|UpNote"]          → $WS2
 assign [class="Nemo|Pcmanfm"]                                       → $WS3
 assign [class="Spotify|mpv|tidal-hifi|YouTube Music Desktop App"]   → $WS4
 assign [class="Transmission-gtk|GParted"]                           → $WS5
@@ -203,11 +203,6 @@ bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5% && ~/.con
 
 # Diminuir Brilho
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%- && ~/.config/i3/scripts/brightness-notify
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#  SCREENSHOTS E SCREENCAST (OTIMIZADOS)
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
